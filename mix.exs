@@ -16,7 +16,7 @@ defmodule ExTealPages.MixProject do
       docs: docs(),
       package: package(),
       name: "ExTealPages",
-      source_url: @source,
+      source_url: @source
     ]
   end
 
