@@ -50,6 +50,8 @@ defmodule ExTealPages.Page do
         query = from(x in schema(), where: x.key in ^keys)
         repo().all(query)
       end
+
+      def identifier(_model), do: nil
     end
   end
 
