@@ -30,7 +30,7 @@ defmodule ExTealPages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_teal, "~> 0.1.5", organization: "motel"},
+      {:ex_teal, "~> 0.2", organization: "motel"},
       {:ecto, "~> 3.0"},
       {:plug, "~> 1.7"},
       {:jason, "~> 1.0"},
