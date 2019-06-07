@@ -71,7 +71,7 @@ defmodule ExTealPages.Page do
     |> Map.keys()
     |> page.all_for_keys()
     |> Enum.reduce(Multi.new(), fn c, acc ->
-      val = conn.params["data"][c.key]
+      val = conn.params[c.key]
 
       cs =
         case Map.get(c.data, "content") do

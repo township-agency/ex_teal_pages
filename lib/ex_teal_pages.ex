@@ -4,6 +4,8 @@ defmodule ExTealPages do
   """
   use ExTeal.Plugin
 
+  alias ExTeal.Asset.Script
+
   def uri, do: "pages"
 
   def repo, do: nil
@@ -16,6 +18,8 @@ defmodule ExTealPages do
     page = page_for_key(key)
     page.to_map()
   end
+
+  def scripts, do: [%Script{path: "js/pages.js"}]
 
   defp page_for_key(key) do
     with {:ok, plugin} <- ExTeal.plugin_for("pages") do
