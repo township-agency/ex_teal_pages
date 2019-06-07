@@ -45,7 +45,7 @@ defmodule ExTealPages.MixProject do
 
   defp package do
     [
-      files: ~w(lib .formatter.exs mix.exs README*),
+      files: ~w(lib .formatter.exs mix.exs README* priv),
       maintainers: [
         "Alexandrea Defreitas",
         "Caleb Oller",
