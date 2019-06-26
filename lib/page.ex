@@ -30,8 +30,8 @@ defmodule ExTealPages.Page do
         |> Map.new(fn k -> {String.to_atom(k.key), page_value_for(k.data)} end)
       end
 
-      def serialize_response(:show, resource, data) do
-        Fields.serialize_response(:show, resource, data)
+      def serialize_response(:show, resource, data, conn) do
+        Fields.serialize_response(:show, resource, data, conn)
       end
 
       def key, do: Naming.resource_name(__MODULE__)
