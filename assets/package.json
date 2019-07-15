@@ -1,7 +1,6 @@
 {
   "name": "ex_teal_pages",
   "private": true,
-  "version": "0.2.0",
   "description": "ExTeal Plugin for Application Configuration and Basic CMS",
   "scripts": {
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
