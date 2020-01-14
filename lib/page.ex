@@ -41,6 +41,8 @@ defmodule ExTealPages.Page do
 
       defoverridable(key: 0, title: 0)
 
+      defp page_value_for(%{"content" => true}), do: true
+      defp page_value_for(%{"content" => false}), do: false
       defp page_value_for(%{"content" => content}), do: content
       defp page_value_for(%{"content_array" => content_array}), do: content_array
 
@@ -65,13 +67,13 @@ defmodule ExTealPages.Page do
     end
   end
 
-  defp multi_for_keys(page, conn) do
-    conn.params
+  defp multi_for_keys(page, %{params: params}) do
+    params
     |> Attributes.from_params()
     |> Map.keys()
     |> page.all_for_keys()
     |> Enum.reduce(Multi.new(), fn c, acc ->
-      val = conn.params[c.key]
+      val = cast(params[c.key])
 
       cs =
         case Map.get(c.data, "content") do
@@ -86,4 +88,9 @@ defmodule ExTealPages.Page do
     end)
     |> page.repo().transaction()
   end
+
+  defp cast(""), do: nil
+  defp cast("true"), do: true
+  defp cast("false"), do: false
+  defp cast(val), do: val
 end

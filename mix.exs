@@ -1,7 +1,7 @@
 defmodule ExTealPages.MixProject do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.4.0"
 
   @source "https://gitlab.motel-lab.com/teal/ex_teal_pages"
 
@@ -30,7 +30,7 @@ defmodule ExTealPages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_teal, ">= 0.3.0", organization: "motel"},
+      {:ex_teal, ">= 0.5.0", organization: "motel"},
       {:ecto, "~> 3.0"},
       {:plug, "~> 1.7"},
       {:jason, "~> 1.0"},
