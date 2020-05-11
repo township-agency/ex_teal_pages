@@ -63,12 +63,15 @@ export default {
       };
     });
 
-    this.field.fill = form => {
+    this.field.fill = formData => {
+      let nestedFormData = new FormData;
       const data = this.indexedFields.map(field => {
-        const val = field.fill({});
-        return { title: field.name, content: val };
+        field.fill(nestedFormData);
+        let value = nestedFormData.get(field.attribute);
+        return { title: field.name, content: value };
       });
-      form[this.field.attribute] = data;
+      console.log(data);
+      formData.append(this.field.attribute, JSON.stringify(data));
     };
   }
 };
