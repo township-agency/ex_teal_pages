@@ -1,7 +1,7 @@
 defmodule ExTealPages.MixProject do
   use Mix.Project
 
-  @version "0.4.0"
+  @version "0.4.1"
 
   @source "https://gitlab.motel-lab.com/teal/ex_teal_pages"
 
