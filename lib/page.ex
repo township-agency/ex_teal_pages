@@ -78,7 +78,7 @@ defmodule ExTealPages.Page do
       cs =
         case Map.get(c.data, "content") do
           nil ->
-            page.schema().changeset(c, %{data: %{"content_array" => val}})
+            page.schema().changeset(c, %{data: %{"content_array" => Jason.decode!(val)}})
 
           _val ->
             page.schema().changeset(c, %{data: %{"content" => val}})

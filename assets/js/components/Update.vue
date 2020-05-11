@@ -101,7 +101,7 @@ export default {
       } = await ExTeal.request()
         .get(`/plugins/pages/${this.pageKey}/update-fields`)
         .catch(error => {
-          if (error.response.status == 404) {
+          if (error.response && error.response.status == 404) {
             this.$router.push({ name: '404' });
             return;
           }
@@ -130,15 +130,8 @@ export default {
           }
         });
       } catch (error) {
-        if (error.response.status == 422) {
+        if (error.response && error.response.status == 422) {
           this.validationErrors = new Errors(error.response.data.errors);
-        }
-
-        if (error.response.status == 409) {
-          this.$toasted.show(
-            'Another user has updated this resource since this page was loaded. Please refresh the page and try again.',
-            { type: 'error' }
-          );
         }
       }
     },
@@ -157,7 +150,7 @@ export default {
         // Reset the form by refetching the fields
         this.getFields();
       } catch (error) {
-        if (error.response.status == 422) {
+        if (error.response && error.response.status == 422) {
           this.validationErrors = new Errors(error.response.data.errors);
         }
       }
