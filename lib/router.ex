@@ -63,7 +63,7 @@ defmodule ExTealPages.Router do
     fields =
       :edit
       |> Fields.fields_for(page)
-      |> Fields.apply_values(model, nil, :edit)
+      |> Fields.apply_values(model, page, conn, :edit)
 
     {:ok, body} = Jason.encode(%{fields: fields})
     Serializer.as_json(conn, body, 200)

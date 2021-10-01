@@ -1,7 +1,7 @@
 defmodule ExTealPages.MixProject do
   use Mix.Project
 
-  @version "0.4.0"
+  @version "0.5.0"
 
   @source "https://gitlab.motel-lab.com/teal/ex_teal_pages"
 
@@ -9,7 +9,7 @@ defmodule ExTealPages.MixProject do
     [
       app: :ex_teal_pages,
       version: @version,
-      elixir: "~> 1.7",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: description(),
