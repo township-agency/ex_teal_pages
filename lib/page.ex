@@ -13,6 +13,7 @@ defmodule ExTealPages.Page do
       use ExTeal.Resource.Repo
       use ExTeal.Resource.Show
       use ExTeal.Resource.Fields
+      use ExTeal.Resource.Policy
 
       import Ecto.Query, only: [from: 2]
 
