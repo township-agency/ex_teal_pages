@@ -3,7 +3,7 @@ defmodule ExTealPages.MixProject do
 
   @version "0.5.0"
 
-  @source "https://gitlab.motel-lab.com/teal/ex_teal_pages"
+  @source "https://github.com/township-agency/ex_teal_pages"
 
   def project do
     [
@@ -47,15 +47,13 @@ defmodule ExTealPages.MixProject do
     [
       files: ~w(lib .formatter.exs mix.exs README* priv),
       maintainers: [
-        "Alexandrea Defreitas",
         "Caleb Oller",
         "Lydia Koller",
         "Samina Khan",
         "Scott Taylor"
       ],
       licenses: ["MIT"],
-      links: %{"GitLab" => @source},
-      organization: "motel"
+      links: %{"GitHub" => @source}
     ]
   end
 
