@@ -33,7 +33,7 @@ defmodule ExTealPages.MixProject do
       {:plug, "~> 1.7"},
       {:jason, "~> 1.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 
@@ -43,7 +43,7 @@ defmodule ExTealPages.MixProject do
 
   defp package do
     [
-      files: ~w(lib .formatter.exs mix.exs README* priv),
+      files: ~w(lib .formatter.exs mix.exs README* CHANGELOG* priv),
       maintainers: [
         "Caleb Oller",
         "Lydia Koller",
