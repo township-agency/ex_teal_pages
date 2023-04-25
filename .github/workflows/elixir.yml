@@ -1,0 +1,45 @@
+name: Elixir Testing CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          otp-version: '25.0'
+          elixir-version: '1.14'
+
+      - name: Cache Mix
+        uses: actions/cache@v2
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install Mix Dependencies
+        if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+
+      - name: Check that `mix format` has been run
+        run: mix format --check-formatted
+
+      - name: Check warnings
+        run: mix compile --warnings-as-errors
+
+      - name: Elixir - Code Analysis
+        run: mix credo --strict
+
