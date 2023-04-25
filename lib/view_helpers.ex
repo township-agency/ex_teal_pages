@@ -4,21 +4,25 @@ defmodule ExTealPages.ViewHelpers do
   """
 
   def content_for(page, key) do
-    with {:ok, copy} <- Map.fetch(page, key) do
-      copy
-    else
+    case Map.fetch(page, key) do
+      {:ok, copy} -> copy
       :error -> nil
     end
   end
 
   def elements_for(page, key) do
-    with {:ok, copy} <- Map.fetch(page, key) do
-      copy
-      |> Enum.map(fn element ->
-        Map.new(element, fn {k, v} -> {String.to_atom(k), v} end)
-      end)
-    else
-      :error -> []
+    case Map.fetch(page, key) do
+      {:ok, copy} ->
+        element_for(copy)
+
+      :error ->
+        []
     end
+  end
+
+  defp element_for(copy) do
+    Enum.map(copy, fn element ->
+      Map.new(element, fn {k, v} -> {String.to_atom(k), v} end)
+    end)
   end
 end

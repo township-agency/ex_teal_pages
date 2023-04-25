@@ -1,15 +1,13 @@
 defmodule ExTealPages.MixProject do
   use Mix.Project
 
-  @version "0.5.0"
-
   @source "https://github.com/township-agency/ex_teal_pages"
 
   def project do
     [
       app: :ex_teal_pages,
-      version: @version,
-      elixir: "~> 1.8",
+      version: "0.5.0",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: description(),
@@ -30,11 +28,11 @@ defmodule ExTealPages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_teal, ">= 0.16.0", organization: "motel"},
+      {:ex_teal, ">= 0.20.0"},
       {:ecto, "~> 3.0"},
       {:plug, "~> 1.7"},
       {:jason, "~> 1.0"},
-      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
@@ -64,7 +62,6 @@ defmodule ExTealPages.MixProject do
         "README.md",
         "CHANGELOG.md"
       ],
-      source_ref: "v#{@version}",
       source_url: @source
     ]
   end

@@ -22,10 +22,12 @@ defmodule ExTealPages do
   def scripts, do: [%Script{path: "js/pages.js"}]
 
   defp page_for_key(key) do
-    with {:ok, plugin} <- ExTeal.plugin_for("pages") do
-      Enum.find(plugin.options.pages, &(&1.key() == key))
-    else
-      _ -> ExTealPages.Page
+    case ExTeal.plugin_for("pages") do
+      {:ok, plugin} ->
+        Enum.find(plugin.options.pages, &(&1.key() == key))
+
+      _ ->
+        ExTealPages.Page
     end
   end
 end
