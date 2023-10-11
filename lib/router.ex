@@ -6,6 +6,7 @@ defmodule ExTealPages.Router do
 
   alias Plug.Conn
 
+  alias ExTeal.Panel
   alias ExTeal.Resource.{Fields, Serializer, Show}
   alias ExTealPages.Page
 
@@ -63,9 +64,12 @@ defmodule ExTealPages.Router do
     fields =
       :edit
       |> Fields.fields_for(page)
-      |> Fields.apply_values(model, page, conn, :edit)
+      |> Fields.apply_values(model, page, conn, :edit, nil)
+      |> Panel.give_panel_to_fields(page)
 
-    {:ok, body} = Jason.encode(%{fields: fields})
+    panels = Panel.gather_panels(page)
+
+    {:ok, body} = Jason.encode(%{fields: fields, panels: panels, title: page.title()})
     Serializer.as_json(conn, body, 200)
   end
 

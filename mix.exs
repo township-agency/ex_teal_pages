@@ -28,7 +28,7 @@ defmodule ExTealPages.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_teal, ">= 0.20.0"},
+      {:ex_teal, ">= 0.27.0"},
       {:ecto, "~> 3.0"},
       {:plug, "~> 1.7"},
       {:jason, "~> 1.0"},

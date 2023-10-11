@@ -3,18 +3,18 @@
   "private": true,
   "description": "ExTeal Plugin for Application Configuration and Basic CMS",
   "scripts": {
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --watch",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "build": "node ./build.mjs",
+    "watch": "node ./build.mjs --watch",
+    "deploy": "node ./build.mjs --deploy"
   },
   "devDependencies": {
-    "axios": "^0.21.1",
-    "cross-env": "^5.2.0",
-    "ex-teal-js": "^1.0.0",
-    "laravel-mix": "^4.0.15",
-    "vue-template-compiler": "2.6.10"
+    "chokidar": "^3.5.3",
+    "esbuild": "^0.19.4",
+    "esbuild-vue": "^1.2.2"
   },
   "dependencies": {
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-template-compiler": "2.7.14",
+    "ex-teal-js": "^1.0.4"
   }
 }
