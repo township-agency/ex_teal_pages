@@ -17,19 +17,25 @@ defmodule ExTealPages.Page do
 
       import Ecto.Query, only: [from: 2]
 
-      alias ExTeal.Naming
+      alias ExTeal.{Field, Naming, Panel}
       alias ExTeal.Resource.{Fields, Model}
 
       def handle_show(_conn, _key), do: to_map()
 
       def to_map do
         fields()
+        |> Enum.map(&page_subfields/1)
+        |> Enum.concat()
         |> Enum.map(fn field ->
           Atom.to_string(field.field)
         end)
         |> all_for_keys()
         |> Map.new(fn k -> {String.to_atom(k.key), page_value_for(k.data)} end)
       end
+
+      defp page_subfields(%Field{options: %{fields: fields}}), do: fields
+      defp page_subfields(%Field{} = field), do: [field]
+      defp page_subfields(%Panel{fields: fields}), do: fields
 
       def serialize_response(:show, resource, data, conn) do
         Fields.serialize_response(:show, resource, data, conn)

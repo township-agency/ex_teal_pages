@@ -2,11 +2,10 @@
   <div v-if="!loading">
     <div class="card-headline">
       <heading class="">
-        Editing {{ pageKey }}
+        Editing {{ title }}
       </heading>
       <div class="flex ml-auto">
         <button
-          dusk="update-button"
           class="ml-auto btn btn-default btn-secondary mr-3"
           @click="updateResource"
         >
@@ -15,38 +14,33 @@
 
         <button
           type="button"
-          dusk="update-and-continue-editing-button"
           class="btn btn-default btn-primary capitalize"
           @click="updateAndContinueEditing"
         >
-          Save {{ pageKey }}
+          Save {{ singularName }}
         </button>
       </div>
     </div>
 
-    <card class="overflow-hidden">
-      <form
-        v-if="fields"
-        @submit.prevent="updateResource"
-      >
-        <!-- Validation Errors -->
-        <validation-errors :errors="validationErrors" />
+    <form
+      v-if="fields"
+      @submit.prevent="updateResource"
+    >
+      <!-- Validation Errors -->
+      <validation-errors :errors="validationErrors" />
 
-        <!-- Fields -->
-        <div
-          v-for="field in fields"
-          :key="field.attribute"
-        >
-          <component
-            :is="'form-' + field.component"
-            :errors="validationErrors"
-            :resource-id="pageKey"
-            :resource-name="pageKey"
-            :field="field"
-          />
-        </div>
-      </form>
-    </card>
+      <form-panel
+        v-for="(panel, index) in panelsWithFields"
+        :key="panel.name"
+        class="mb-6"
+        :index="index"
+        :panel="panel"
+        :name="panel.name"
+        :fields="panel.fields"
+        :validation-errors="validationErrors"
+        :resource-name="resourceName"
+      />
+    </form>
   </div>
 </template>
 
@@ -68,6 +62,8 @@ export default {
     loading: true,
     fields: [],
     validationErrors: new Errors(),
+    panels: [],
+    title: ''
   }),
 
   computed: {
@@ -81,6 +77,17 @@ export default {
         });
       });
     },
+
+    panelsWithFields () {
+      return _.map(this.panels, panel => {
+        return {
+          ...panel,
+          fields: _.filter(this.fields, field => {
+            return field.panel === panel.key;
+          })
+        };
+      });
+    }
   },
 
   created () {
@@ -97,7 +104,7 @@ export default {
       this.fields = [];
 
       const {
-        data: { fields }
+        data: { fields, panels, title }
       } = await ExTeal.request()
         .get(`/plugins/pages/${this.pageKey}/update-fields`)
         .catch(error => {
@@ -108,6 +115,8 @@ export default {
         });
 
       this.fields = fields;
+      this.panels = panels;
+      this.title = title;
 
       this.loading = false;
     },
@@ -119,7 +128,7 @@ export default {
       try {
         await this.updateRequest();
 
-        this.$toasted.show(`The ${this.pageKey} was updated`, {
+        this.$toasted.show(`The ${this.title} was updated`, {
           type: 'success'
         });
 
@@ -143,7 +152,7 @@ export default {
       try {
         await this.updateRequest();
 
-        this.$toasted.show(`The ${this.pageKey} was updated!`, {
+        this.$toasted.show(`The ${this.title} was updated!`, {
           type: 'success'
         });
 

@@ -67,26 +67,24 @@ export default {
      * Get the available field panels.
      */
     availablePanels () {
-      if (this.page) {
-        const panels = {};
+      if (!this.page) { return []; }
+      const panels = {};
 
-        this.page.fields.forEach(field => {
-          if (field.options.child_component) {
-            return (panels[field.name] = this.createPanelForArray(field));
-          } else if (field.component == 'resource-field') {
-            return (panels[field.name] = this.createPanelForRelationship(
-              field
-            ));
-          } else if (panels[field.panel]) {
-            return panels[field.panel].fields.push(field);
-          }
+      this.page.fields.forEach(field => {
+        if (field.options.child_component) {
+          return (panels[field.name] = this.createPanelForArray(field));
+        } else if (field.component == 'resource-field') {
+          return (panels[field.name] = this.createPanelForRelationship(
+            field
+          ));
+        } else if (panels[field.panel]) {
+          return panels[field.panel].fields.push(field);
+        }
 
-          panels[field.panel] = this.createPanelForField(field);
-        });
+        panels[field.panel] = this.createPanelForField(field);
+      });
 
-        return toArray(panels);
-      }
-      return [];
+      return toArray(panels);
     }
   },
 

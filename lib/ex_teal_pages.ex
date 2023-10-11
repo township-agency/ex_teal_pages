@@ -19,7 +19,7 @@ defmodule ExTealPages do
     page.to_map()
   end
 
-  def scripts, do: [%Script{path: "js/pages.js"}]
+  def scripts, do: [%Script{path: "pages.js"}]
 
   defp page_for_key(key) do
     case ExTeal.plugin_for("pages") do
