@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/township-agency/ex_teal_pages/compare/v0.6.0...v0.7.0) (2023-10-11)
+
+
+### Features
+
+* Refactor assets to esbuild, add panels to pages ([#46](https://github.com/township-agency/ex_teal_pages/issues/46)) ([705e819](https://github.com/township-agency/ex_teal_pages/commit/705e819094db73d155ced3360150102bb87f9a86))
+
 ## [0.6.0](https://github.com/township-agency/ex_teal_pages/compare/v0.5.0...v0.6.0) (2023-04-25)
 
 
